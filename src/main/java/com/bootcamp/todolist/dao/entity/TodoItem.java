@@ -18,5 +18,5 @@ public class TodoItem {
     @Id
     Long id;
     String text;
-    int status; // 0: not done, 1: done
+    int done; // 0: not done, 1: done
 }

@@ -15,26 +15,30 @@ public class TodoRepositoryDBImpl implements TodoRepository {
 
     @Override
     public void clearAll() {
-
+        todoJPARepository.deleteAll();
     }
 
     @Override
     public List<TodoItem> findAll() {
-        return List.of();
+        return todoJPARepository.findAll();
     }
 
     @Override
     public TodoItem findById(long id) {
-        return null;
+        return todoJPARepository.findById(id).orElse(null);
     }
 
     @Override
     public TodoItem save(TodoItem item) {
-        return null;
+        return todoJPARepository.save(item);
     }
 
     @Override
     public boolean deleteById(long id) {
+        if (findById(id) != null) {
+            todoJPARepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 }
