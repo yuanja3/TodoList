@@ -27,7 +27,7 @@ public class TodoListController {
     @GetMapping(value = "/todos/{id}")
     public ResponseEntity<TodoItem> findById(@PathVariable long id) {
         return todoService.findById(id)
-                .map(ResponseEntity::ok)
+                .map(todoItem -> ResponseEntity.ok().body(todoItem))
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping("/todos")
