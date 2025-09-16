@@ -30,9 +30,17 @@ public class TodoService {
         String text = req.getText();
         TodoItem item = new TodoItem();
         item.setText(text==null ? "" : text);
+        item.setDone(0);
         return Optional.ofNullable(todoRepository.save(item));
     }
-
+    public Optional<TodoItem> update(long id, TodoItem item) {
+        return findById(id)
+                .map(existingItem -> {
+                    existingItem.setText(item.getText());
+                    existingItem.setDone(item.getDone());
+                    return todoRepository.save(existingItem);
+                });
+    }
     public boolean deleteById(long id) {
         return todoRepository.deleteById(id);
     }
