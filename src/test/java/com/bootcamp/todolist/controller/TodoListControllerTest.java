@@ -186,4 +186,39 @@ public class TodoListControllerTest {
                         .content(updatedRequestBody))
                 .andExpect(status().isUnprocessableEntity());
     }
+    @Test
+    void should_return_204_when_delete_given_a_existing_id() throws Exception {
+        //test implement
+        String requestBody = """
+                {
+                    "text": "Buy milk"
+                }
+                """;
+        ResultActions resultActions = mockMvc.perform(post("/todos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody));
+        MvcResult mvcResult = resultActions.andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        long id= new ObjectMapper().readTree(contentAsString).get("id").asLong();
+        mockMvc.perform(delete("/todos/%d".formatted(id)))
+                .andExpect(status().isNoContent());
+    }
+    @Test
+    void should_return_404_when_delete_given_a_non_existing_id() throws Exception {
+        //test implement
+        //test implement
+        String requestBody = """
+                {
+                    "text": "Buy milk"
+                }
+                """;
+        ResultActions resultActions = mockMvc.perform(post("/todos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody));
+        MvcResult mvcResult = resultActions.andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        long id= new ObjectMapper().readTree(contentAsString).get("id").asLong();
+        mockMvc.perform(delete("/todos/%d".formatted(id+1)))
+                .andExpect(status().isNotFound());
+    }
 }

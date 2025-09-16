@@ -51,7 +51,8 @@ public class TodoListController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
-    public ResponseEntity<Void> deleteById(long id) {
+    @DeleteMapping(value = "/todos/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable long id) {
         if (todoService.deleteById(id)) {
             return ResponseEntity.noContent().build();
         } else {
