@@ -1,5 +1,6 @@
 package com.bootcamp.todolist.service;
 
+import com.bootcamp.todolist.dao.dto.CreateTodoItemReq;
 import com.bootcamp.todolist.dao.entity.TodoItem;
 import com.bootcamp.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,13 @@ public class TodoService {
     public Optional<TodoItem> save(TodoItem item) {
         return Optional.ofNullable(todoRepository.save(item));
     }
+    public Optional<TodoItem> create(CreateTodoItemReq req) {
+        String text = req.getText();
+        TodoItem item = new TodoItem();
+        item.setText(text==null ? "" : text);
+        return Optional.ofNullable(todoRepository.save(item));
+    }
+
     public boolean deleteById(long id) {
         return todoRepository.deleteById(id);
     }

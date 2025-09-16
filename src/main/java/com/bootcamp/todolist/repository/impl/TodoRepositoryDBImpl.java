@@ -30,6 +30,7 @@ public class TodoRepositoryDBImpl implements TodoRepository {
 
     @Override
     public TodoItem save(TodoItem item) {
+        item.setDone(0);
         return todoJPARepository.save(item);
     }
 

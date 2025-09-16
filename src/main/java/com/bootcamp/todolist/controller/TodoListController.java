@@ -1,13 +1,11 @@
 package com.bootcamp.todolist.controller;
 
+import com.bootcamp.todolist.dao.dto.CreateTodoItemReq;
 import com.bootcamp.todolist.dao.entity.TodoItem;
 import com.bootcamp.todolist.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +28,9 @@ public class TodoListController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    public ResponseEntity<TodoItem> create(TodoItem item) {
-        return todoService.save(item)
+    @PostMapping("/todos")
+    public ResponseEntity<TodoItem> create(@RequestBody CreateTodoItemReq item) {
+        return todoService.create(item)
                 .map(todoItem -> ResponseEntity.status(201).body(todoItem))
                 .orElse(ResponseEntity.status(500).build());
     }

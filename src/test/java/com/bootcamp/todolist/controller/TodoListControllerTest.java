@@ -43,8 +43,7 @@ public class TodoListControllerTest {
         //test implement
         String requestBody = """
                 {
-                    "text": "Buy milk",
-                    "done": false
+                    "text": "Buy milk"
                 }
                 """;
         ResultActions resultActions = mockMvc.perform(post("/todos")
@@ -58,7 +57,7 @@ public class TodoListControllerTest {
                     {
                         "id": %d,
                         "text": "Buy milk",
-                        "done": false
+                        "done": 0
                     }
                 ]
                 """.formatted(id)));
