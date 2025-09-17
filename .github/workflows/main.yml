@@ -2,9 +2,9 @@ name: Main Branch CI/CD to Dev
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 permissions:
   contents: read
