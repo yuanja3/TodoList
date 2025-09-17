@@ -1,7 +1,7 @@
 package com.bootcamp.todolist.controller;
 
 import com.bootcamp.todolist.dao.dto.CreateTodoItemReq;
-import com.bootcamp.todolist.dao.dto.UpdateTodoItemResp;
+import com.bootcamp.todolist.dao.dto.UpdateTodoItemReq;
 import com.bootcamp.todolist.dao.entity.TodoItem;
 import com.bootcamp.todolist.exception.IncompletePayloadException;
 import com.bootcamp.todolist.service.TodoService;
@@ -37,7 +37,7 @@ public class TodoListController {
                 .orElse(ResponseEntity.status(500).build());
     }
     @PutMapping(value = "/todos/{id}")
-    public ResponseEntity<TodoItem> update(@PathVariable long id, @RequestBody UpdateTodoItemResp item) {
+    public ResponseEntity<TodoItem> update(@PathVariable long id, @RequestBody UpdateTodoItemReq item) {
         if (item==null || item.getText() == null ) {
             throw new IncompletePayloadException("Payload is incomplete");
         }

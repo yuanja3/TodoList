@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateTodoItemResp {
+public class UpdateTodoItemReq {
     private String text;
     private int done; // 0: not done, 1: done
 }
